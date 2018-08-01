@@ -12,7 +12,9 @@ A tool to search api usage pattern and code.
 
 如下图所示，上面的可选的菜单是Doc、Code和Usage, 用户可以根据自己的需要去查询相关的内容进行搜索。在返回结果里，用户可能比较关注的是usage(API用法模式)和code，它是数据集里用户匹配度最高的实例，而上面的Doc则是这条实例里该用户所填写的Doc。点击最下面的next按钮可以查看更多不同的usage pattern 和 code。
 
-![](images/api-code-recommend.jpg)
+
+
+![-c400](images/api-code-recommend.jpg)
 
 
 ## 环境配置
