@@ -1,6 +1,6 @@
-# Api-code_searcher
+# API-code_searcher
 
-A tool to search api usage pattern and code.
+A tool to search API usage pattern and code.
 一款为了方便开发人员使用的API和代码推荐的工具
 
 ## 数据介绍
