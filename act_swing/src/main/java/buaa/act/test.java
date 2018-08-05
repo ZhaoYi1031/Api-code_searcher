@@ -12,17 +12,13 @@ import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.ScrollPane;
 import javax.swing.JList;
 import javax.swing.JToggleButton;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -30,20 +26,8 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import javax.swing.JSpinner;
-import javax.swing.ScrollPaneConstants;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
-
-public class App {
+public class test {
 
 	private JFrame frame;
 	private JTextField inputQuery;
@@ -59,17 +43,13 @@ public class App {
 	private JButton btnNewButton;
 	private JTextField outputRecommend;
 	private int queryId;
-	private JTextArea cntPatterns;
-	private JPanel panel;
-	private JTextArea textHead;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					App swing = new App();
-					swing.frame.setVisible(true);
-					swing.frame.revalidate();
+//					swing.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -77,66 +57,20 @@ public class App {
 		});
 	}
 
-	public App() {
+	public test() {
 		initialize();
 	}
 
-	public static Button getButton(String name){
-		Button button = new Button(name);
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0){
-				System.out.println("HASAKI");
-			}
-		});
-		
-		return button;
-	}
-	
-//	public static Panel getPanel(String name, ArrayList<String> usages){
-//		Panel button = new JPanel();
-//		
-//		button.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent arg0){
-//				System.out.println("HASAKI");
-//			}
-//		});
-//		return button;
-//	}
-	
-	public static JTextArea getJTextAreaMin(String name){
-		JTextArea jtextArea = new JTextArea(name);
-		jtextArea.setLineWrap(true);
-		jtextArea.setColumns(4);
-		return jtextArea;
-	}
-	
-	public static JTextArea getJTextArea(String name){
-		JTextArea jtextArea = new JTextArea(name);
-		jtextArea.setLineWrap(true);
-		jtextArea.setColumns(19);
-//		button.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent arg0){
-//				System.out.println("HASAKI");
-//			}
-//		});
-		return jtextArea;
-	}
-	
-	
 	private void initialize() {
 		ApiWork aw0 = new ApiWork();
 		
 		
-		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
-		frame.setBounds(100, 100, 865, 700);
+		frame.setBounds(100, 100, 680, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-	    
+		
 		btnSearch = new JButton("");
 		btnSearch.setContentAreaFilled(false);
 		btnSearch.setOpaque(true);
@@ -171,7 +105,7 @@ public class App {
 //				System.out.println(Class.getResource("/"));
 			}
 		});
-		btnSearch.setBounds(641, 40, 40, 40);
+		btnSearch.setBounds(486, 30, 40, 40);
 		frame.getContentPane().add(btnSearch);
 		
 		inputQuery = new JTextField();
@@ -216,7 +150,6 @@ public class App {
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				 int n;
 				 if(e.getKeyCode() == KeyEvent.VK_ENTER){ //判断按下的键是否是回车键
 					 	queryId = 0; //第一个查询的
 					 
@@ -242,77 +175,18 @@ public class App {
 						
 						System.out.println("-----------------------");
 					 
-//						public void actionPerformed(ActionEvent e) 
-//							String queryString = inputQuery.getText();
-							
-						panel.removeAll();
-						
-						//开始进行代码的推荐
-						
-						ArrayList<String> usages = aw0.search3(queryString, 10);//choose the most 10usages
-							
-						Hierarchical hi = new Hierarchical();
-						String clusterAns = hi.searchWork(usages, aw0.scores);
-						Map mapElements = new HashMap();
-							
-						System.out.println("usage="+clusterAns);
-							
-						if (clusterAns != null && clusterAns != "")	{
-							n = hi.n; //一般是10，为了防止搜索一些出的结果小于10的，比如搜sort只有9
-							boolean used[] = new boolean[15];
-							
-							Arrays.fill(used, false);
-							int cnt = 0;
-							for (int i = 0; i < n; ++i){
-								if (hi.belong[i] >=0 && hi.belong[i] < n && !used[hi.belong[i]]){
-									used[hi.belong[i]] = true;
-									cnt ++;
-								}
-							}
-							cntPatterns.setText(String.valueOf(cnt));
-							List<S1> s1Set = new ArrayList<S1>();
-					       	S1 ss;
-							for (int i = 0; i < n; ++i)
-							if (used[i]){
-								ss = new S1(i, hi.scoreAll[i]);
-								s1Set.add(ss);
-							}
-							int len = s1Set.size();
-						     //对容器进行排序的函数
-						    Collections.sort(s1Set);
-					       	Iterator<S1> it = s1Set.iterator();
-					       	while(it.hasNext()){
-					       		System.out.println();
-					       		S1 ss1 = it.next();
-//					       		System.out.println(ss1.getX()+"    "+ss1.getY());
-					       		panel.add(getButton(String.valueOf((int)ss1.getY())));
-					       		String us = "";
-					       		for (int i = 0; i < n; ++i){
-					       			if (hi.belong[i] == ss1.getX()){
-					       				String tmp = hi.uss.get(i);
-					       				tmp = tmp.substring(0, Math.min(34, tmp.length()));
-					       				us = us + tmp  + "\n";
-					       			}
-					       		}
-					       		panel.add(getJTextArea(String.valueOf(us)));
-//					       		panel.add(getButton(String.valueOf(us))); //String.valueOf(clusterAns)
-								panel.revalidate();
-					       	}
-						}
-
-						
 				 }
 			}
 		});
 		inputQuery.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		inputQuery.setBounds(89, 45, 338, 26);
+		inputQuery.setBounds(95, 39, 219, 26);
 		frame.getContentPane().add(inputQuery);
 		inputQuery.setColumns(10);
 		
 //		frame.getContentPane().add(usageAns);
 		
-		JScrollPane scrollPaneCode = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollPaneCode.setBounds(461, 323, 379, 286);
+		JScrollPane scrollPaneCode = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPaneCode.setBounds(227, 312, 379, 260);
 		frame.getContentPane().add(scrollPaneCode);
 		
 		txtCode = new JTextArea();
@@ -323,7 +197,7 @@ public class App {
 		
 		comboBox = new JComboBox();
 		comboBox.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		comboBox.setBounds(461, 45, 132, 27);
+		comboBox.setBounds(326, 40, 132, 27);
 		comboBox.addItem("Doc");
 		comboBox.addItem("Code");
 		comboBox.addItem("Usage");
@@ -335,7 +209,7 @@ public class App {
 		lblCode.setForeground(Color.BLACK);
 		lblCode.setEditable(false);
 		lblCode.setText("Code");
-		lblCode.setBounds(283, 413, 130, 26);
+		lblCode.setBounds(35, 338, 130, 26);
 		frame.getContentPane().add(lblCode);
 		lblCode.setColumns(10);
 		lblCode.setHorizontalAlignment(JTextField.CENTER);
@@ -346,7 +220,7 @@ public class App {
 		lblDoc.setForeground(Color.BLACK);
 		lblDoc.setEditable(false);
 		lblDoc.setColumns(10);
-		lblDoc.setBounds(283, 152, 130, 26);
+		lblDoc.setBounds(35, 133, 130, 26);
 		lblDoc.setHorizontalAlignment(JTextField.CENTER);
 		
 		frame.getContentPane().add(lblDoc);
@@ -354,7 +228,7 @@ public class App {
 		txtDoc = new JTextArea();
 		txtDoc.setLineWrap(true);
 		txtDoc.setBackground(Color.LIGHT_GRAY);
-		txtDoc.setBounds(461, 136, 376, 40);
+		txtDoc.setBounds(227, 118, 376, 40);
 		frame.getContentPane().add(txtDoc);
 		
 		lblUsage = new JTextField();
@@ -364,11 +238,11 @@ public class App {
 		lblUsage.setForeground(Color.BLACK);
 		lblUsage.setEditable(false);
 		lblUsage.setColumns(10);
-		lblUsage.setBounds(283, 228, 130, 26);
+		lblUsage.setBounds(35, 222, 130, 26);
 		frame.getContentPane().add(lblUsage);
 		
-		JScrollPane scrollPaneUsage = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollPaneUsage.setBounds(461, 211, 377, 72);
+		JScrollPane scrollPaneUsage = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPaneUsage.setBounds(229, 203, 377, 72);
 		frame.getContentPane().add(scrollPaneUsage);
 		
 		txtUsage = new JTextArea();
@@ -388,7 +262,7 @@ public class App {
 		txtQuery.setForeground(Color.BLACK);
 		txtQuery.setEditable(false);
 		txtQuery.setColumns(10);
-		txtQuery.setBounds(18, 45, 60, 26);
+		txtQuery.setBounds(35, 39, 60, 26);
 		frame.getContentPane().add(txtQuery);
 		
 		btnNewButton = new JButton("Next");
@@ -419,7 +293,7 @@ public class App {
 				System.out.println("-----------------------");
 			}
 		});
-		btnNewButton.setBounds(283, 630, 183, 29);
+		btnNewButton.setBounds(246, 612, 117, 29);
 		frame.getContentPane().add(btnNewButton);
 		
 		outputRecommend = new JTextField();
@@ -428,45 +302,8 @@ public class App {
 		outputRecommend.setForeground(Color.BLACK);
 		outputRecommend.setEditable(false);
 		outputRecommend.setColumns(10);
-		outputRecommend.setBounds(89, 77, 338, 26);
+		outputRecommend.setBounds(95, 77, 179, 24);
 		frame.getContentPane().add(outputRecommend);
-		
-		this.panel = new JPanel();
-		panel.setBounds(17, 147, 234, 454);
-		frame.getContentPane().add(panel);
-		this.panel.setLayout(new FlowLayout());
-		
-		JTextArea txtrPatterns = new JTextArea();
-		txtrPatterns.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		txtrPatterns.setText("Usage Patterns:");
-		txtrPatterns.setBounds(18, 119, 132, 16);
-		frame.getContentPane().add(txtrPatterns);
-		
-		cntPatterns = new JTextArea();
-		cntPatterns.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		cntPatterns.setBounds(155, 120, 40, 16);
-		frame.getContentPane().add(cntPatterns);
-		
-		textHead = new JTextArea();
-		textHead.setEditable(false);
-		textHead.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 24));
-		textHead.setForeground(UIManager.getColor("Button.background"));
-		textHead.setText("   API-Code Searcher");
-		textHead.setBounds(0, 0, 865, 32);
-		textHead.setOpaque(true);
-
-		textHead.setBackground(SystemColor.textHighlight);
-		frame.getContentPane().add(textHead);
-		
-//		JScrollPane scrollPaneCode = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-//		scrollPaneCode.setBounds(511, 312, 379, 260);
-//		frame.getContentPane().add(scrollPaneCode);
-//		
-//		txtCode = new JTextArea();
-//		scrollPaneCode.setViewportView(txtCode);
-//		txtCode.setBackground(Color.LIGHT_GRAY);
-//		txtCode.setLineWrap(true);
-		
 		
 		/*txtUsage = new JTextArea();
 		txtUsage.setLineWrap(true);
@@ -475,29 +312,3 @@ public class App {
 		frame.getContentPane().add(txtUsage);*/
 	}
 }
-
-//采用实现Comparable接口的方法实现排序
-class S1 implements Comparable{
-	int x;
-	double y;
-	S1(int x, double y){
-		this.x = x;
-		this.y = y;
-	}
-	//实现排序方法
-	@Override
-	public int compareTo(Object o) {
-		S1 obj = (S1) o;
-		return Double.compare(obj.y, y);
-	}
-	
-	public int getX(){
-		return x;
-	}
-	
-	public double getY(){
-		return y;
-	}
-}
-
-

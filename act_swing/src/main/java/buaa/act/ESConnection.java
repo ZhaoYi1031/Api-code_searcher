@@ -8,7 +8,12 @@ import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class ESConnection { //连接ES的单例模式
+
+/**
+ * Created by luckcul on 17-6-12.
+ * 连接ES的单例模式
+ */
+public class ESConnection {
     private static final TransportClient client = init();
 
     private static TransportClient init(){

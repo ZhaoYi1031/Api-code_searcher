@@ -18,7 +18,8 @@ import java.util.ArrayList;
 
 import static org.elasticsearch.index.query.QueryBuilders.multiMatchQuery;
 
-public class ApiWork{ //主要完成各种搜索相关
+public class ApiWork
+{
 	public final static int SEARCH_SIZE = 10;
 	
 	public final static String HOST = "192.168.7.101";//localhost";
