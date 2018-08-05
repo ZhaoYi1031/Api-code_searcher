@@ -286,6 +286,7 @@ public class App {
 					       		S1 ss1 = it.next();
 //					       		System.out.println(ss1.getX()+"    "+ss1.getY());
 					       		panel.add(getButton(String.valueOf((int)ss1.getY())));
+//					       		panel.add(new Button("CNMD"));
 					       		String us = "";
 					       		for (int i = 0; i < n; ++i){
 					       			if (hi.belong[i] == ss1.getX()){
