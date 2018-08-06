@@ -10,11 +10,15 @@ A tool to search API usage pattern and code.
 
 ## 界面介绍
 
-如下图所示，上面的可选的菜单是Doc、Code和Usage, 用户可以根据自己的需要去查询相关的内容进行搜索。在返回结果里，用户可能比较关注的是usage(API用法模式)和code，它是数据集里用户匹配度最高的实例，而上面的Doc则是这条实例里该用户所填写的Doc。点击最下面的next按钮可以查看更多不同的usage pattern 和 code。
+如下图1所示，上面的可选的菜单是Doc、Code和Usage, 用户可以根据自己的需要去查询相关的内容进行搜索。在返回结果里，用户可能比较关注的是usage(API用法模式)和code，它是数据集里用户匹配度最高的实例，而上面的Doc则是这条实例里该用户所填写的Doc。点击最下面的next按钮可以查看更多不同的usage pattern 和 code。
+
+【2.0更新】在界面的左边加入了得分最高10个检索的聚类后的使用模式的结果，在键盘键入回车后即可查看到该查询字符串的聚类后的聚类，如下图2.
 
 
 
 ![-c400](images/api-code-recommend.jpg)
+
+![api-code-recommend-V2.0.jpg](https://i.loli.net/2018/08/06/5b679f96d0048.jpg)
 
 
 ## 环境配置
@@ -24,7 +28,8 @@ A tool to search API usage pattern and code.
 
 ## demo展示
 
-https://youtu.be/ObOvYbuAbVM
+1.0版本：https://youtu.be/ObOvYbuAbVM
+2.0版本：https://youtu.be/Jw1WeaLdisQ
 
 ## 文件说明
     
