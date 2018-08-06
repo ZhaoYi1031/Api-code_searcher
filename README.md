@@ -16,9 +16,9 @@ A tool to search API usage pattern and code.
 
 
 
-![-c400](images/api-code-recommend.jpg)
+![-c430](images/api-code-recommend.jpg)
 
-![api-code-recommend-V2.0.jpg](https://i.loli.net/2018/08/06/5b679f96d0048.jpg)
+![-c430](https://i.loli.net/2018/08/06/5b679f96d0048.jpg)
 
 
 ## 环境配置

@@ -17,6 +17,7 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.ScrollPane;
 import javax.swing.JList;
 import javax.swing.JToggleButton;
@@ -62,6 +63,7 @@ public class App {
 	private JTextArea cntPatterns;
 	private JPanel panel;
 	private JTextArea textHead;
+	private JScrollPane scrollPaneLeft;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -93,18 +95,6 @@ public class App {
 		return button;
 	}
 	
-//	public static Panel getPanel(String name, ArrayList<String> usages){
-//		Panel button = new JPanel();
-//		
-//		button.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent arg0){
-//				System.out.println("HASAKI");
-//			}
-//		});
-//		return button;
-//	}
-	
 	public static JTextArea getJTextAreaMin(String name){
 		JTextArea jtextArea = new JTextArea(name);
 		jtextArea.setLineWrap(true);
@@ -116,20 +106,18 @@ public class App {
 		JTextArea jtextArea = new JTextArea(name);
 		jtextArea.setLineWrap(true);
 		jtextArea.setColumns(19);
-//		button.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent arg0){
-//				System.out.println("HASAKI");
-//			}
-//		});
+		/*button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0){
+				System.out.println("HASAKI");
+			}
+		});*/
 		return jtextArea;
 	}
 	
 	
 	private void initialize() {
 		ApiWork aw0 = new ApiWork();
-		
-		
 		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
@@ -179,13 +167,9 @@ public class App {
 			@Override
 			public void keyReleased(KeyEvent e) { //keyTyped
 //				String queryString = inputQuery.getText();
-//				
 //				String selectedItem = comboBox.getSelectedItem().toString();
-//				
 //				String ans_recommend = aw0.search4(queryString, selectedItem);
-//				
 //				outputRecommend.setText(ans_recommend);
-				
 				
 				String queryString = inputQuery.getText();
 				String[] ans_test = new String[5];
@@ -216,7 +200,6 @@ public class App {
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				 int n;
 				 if(e.getKeyCode() == KeyEvent.VK_ENTER){ //判断按下的键是否是回车键
 					 	queryId = 0; //第一个查询的
 					 
@@ -258,13 +241,12 @@ public class App {
 						System.out.println("usage="+clusterAns);
 							
 						if (clusterAns != null && clusterAns != "")	{
-							n = hi.n; //一般是10，为了防止搜索一些出的结果小于10的，比如搜sort只有9
 							boolean used[] = new boolean[15];
 							
 							Arrays.fill(used, false);
 							int cnt = 0;
-							for (int i = 0; i < n; ++i){
-								if (hi.belong[i] >=0 && hi.belong[i] < n && !used[hi.belong[i]]){
+							for (int i = 0; i < 10; ++i){
+								if (hi.belong[i] >=0 && hi.belong[i] < 10 && !used[hi.belong[i]]){
 									used[hi.belong[i]] = true;
 									cnt ++;
 								}
@@ -272,7 +254,7 @@ public class App {
 							cntPatterns.setText(String.valueOf(cnt));
 							List<S1> s1Set = new ArrayList<S1>();
 					       	S1 ss;
-							for (int i = 0; i < n; ++i)
+							for (int i = 0; i < 10; ++i)
 							if (used[i]){
 								ss = new S1(i, hi.scoreAll[i]);
 								s1Set.add(ss);
@@ -286,12 +268,11 @@ public class App {
 					       		S1 ss1 = it.next();
 //					       		System.out.println(ss1.getX()+"    "+ss1.getY());
 					       		panel.add(getButton(String.valueOf((int)ss1.getY())));
-//					       		panel.add(new Button("CNMD"));
 					       		String us = "";
-					       		for (int i = 0; i < n; ++i){
+					       		for (int i = 0; i < 10; ++i){
 					       			if (hi.belong[i] == ss1.getX()){
 					       				String tmp = hi.uss.get(i);
-					       				tmp = tmp.substring(0, Math.min(34, tmp.length()));
+					       				tmp = tmp.substring(0, Math.min(36, tmp.length()));
 					       				us = us + tmp  + "\n";
 					       			}
 					       		}
@@ -432,10 +413,22 @@ public class App {
 		outputRecommend.setBounds(89, 77, 338, 26);
 		frame.getContentPane().add(outputRecommend);
 		
-		this.panel = new JPanel();
-		panel.setBounds(17, 147, 234, 454);
-		frame.getContentPane().add(panel);
-		this.panel.setLayout(new FlowLayout());
+		panel = new JPanel();
+		panel.setPreferredSize(new Dimension(234, 454));
+//		panel.setBounds(17, 147, 234, 454);
+//		frame.getContentPane().add(panel);
+		panel.setLayout(new FlowLayout());
+		
+		scrollPaneLeft = new JScrollPane(panel);
+		scrollPaneLeft.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPaneLeft.setToolTipText("ToolBar");
+		scrollPaneLeft.setBounds(17, 147, 234, 454);
+//		scrollPaneLeft.add(panel);
+		scrollPaneLeft.setViewportView(panel);
+		
+		frame.getContentPane().add(scrollPaneLeft);
+//		this.panel.add(scrollPaneLeft);
+		
 		
 		JTextArea txtrPatterns = new JTextArea();
 		txtrPatterns.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
