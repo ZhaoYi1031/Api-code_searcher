@@ -106,12 +106,6 @@ public class App {
 		JTextArea jtextArea = new JTextArea(name);
 		jtextArea.setLineWrap(true);
 		jtextArea.setColumns(19);
-		/*button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0){
-				System.out.println("HASAKI");
-			}
-		});*/
 		return jtextArea;
 	}
 	
@@ -156,7 +150,6 @@ public class App {
 				
 				System.out.println("-----------------------");
 				
-//				System.out.println(Class.getResource("/"));
 			}
 		});
 		btnSearch.setBounds(641, 40, 40, 40);
@@ -166,11 +159,6 @@ public class App {
 		inputQuery.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) { //keyTyped
-//				String queryString = inputQuery.getText();
-//				String selectedItem = comboBox.getSelectedItem().toString();
-//				String ans_recommend = aw0.search4(queryString, selectedItem);
-//				outputRecommend.setText(ans_recommend);
-				
 				String queryString = inputQuery.getText();
 				String[] ans_test = new String[5];
 				String selectedItem = comboBox.getSelectedItem().toString();
@@ -224,9 +212,6 @@ public class App {
 						txtCode.setText(ans_test[3]); //buffer.toString()
 						
 						System.out.println("-----------------------");
-					 
-//						public void actionPerformed(ActionEvent e) 
-//							String queryString = inputQuery.getText();
 							
 						panel.removeAll();
 						
@@ -429,7 +414,6 @@ public class App {
 		frame.getContentPane().add(scrollPaneLeft);
 //		this.panel.add(scrollPaneLeft);
 		
-		
 		JTextArea txtrPatterns = new JTextArea();
 		txtrPatterns.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		txtrPatterns.setText("Usage Patterns:");
@@ -451,22 +435,6 @@ public class App {
 
 		textHead.setBackground(SystemColor.textHighlight);
 		frame.getContentPane().add(textHead);
-		
-//		JScrollPane scrollPaneCode = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-//		scrollPaneCode.setBounds(511, 312, 379, 260);
-//		frame.getContentPane().add(scrollPaneCode);
-//		
-//		txtCode = new JTextArea();
-//		scrollPaneCode.setViewportView(txtCode);
-//		txtCode.setBackground(Color.LIGHT_GRAY);
-//		txtCode.setLineWrap(true);
-		
-		
-		/*txtUsage = new JTextArea();
-		txtUsage.setLineWrap(true);
-		txtUsage.setBackground(Color.LIGHT_GRAY);
-		txtUsage.setBounds(227, 287, 331, 39);
-		frame.getContentPane().add(txtUsage);*/
 	}
 }
 

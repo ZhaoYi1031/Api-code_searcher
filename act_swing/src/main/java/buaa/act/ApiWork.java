@@ -81,7 +81,7 @@ public class ApiWork
 	
 	public String[] search2(String queryString, String queryType, int id){ //返回的是匹配得分中最多的那个
 //		TransportClient client = ESConnection.getConnection();   //连接ES
-		System.out.println("OOOOOOOOOOOOOOOOOOOOO"+queryType.toLowerCase());
+		System.out.println("queryType="+queryType.toLowerCase());
 		if (queryType.equals("Doc")){
 			queryType = "sentence";
 		}

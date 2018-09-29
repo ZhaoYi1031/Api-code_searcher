@@ -45,8 +45,6 @@ public int n; //一般是10
 		String s1, s2;
 		s1 = one.attributes[0];
 		s2 = two.attributes[0];
-//		System.out.println("one="+s1+"\n two="+s2);
-//		System.exit(0);
 		String[] w1 = new String[10010];// = s1.split(" ");
 		String[] w2 = new String[10010];// = s2.split(" ");
 		int pos = 0, lastpos, cnt1 = 0, cnt2 = 0;
@@ -60,8 +58,6 @@ public int n; //一般是10
 			}
 			w1[cnt1++] = s1.substring(lastpos, pos);
 		}
-//		if (cnt1==1779)
-//			System.exit(0);
 		pos = 0;
 		while (pos < s2.length()){
 			
@@ -74,20 +70,18 @@ public int n; //一般是10
 			}
 			w2[cnt2++] = s2.substring(lastpos, pos);
 		}
-//		System.out.println("cnt1="+cnt1+" cnt2="+cnt2);
 		Set<String> h1 = new HashSet<String>(); 
 		Set<String> h2 = new HashSet<String>(); 
 		int l1 = w1.length, l2 = w2.length;
 		int tot=0;
 		StringBuilder tmp = new StringBuilder();
 		for (int i = 0; i < cnt1; ++i){ //l1
-//			String tmp = "";
 			tmp.setLength( 0 );//相当于清空
 			for (int j = i; j < cnt1; ++j){ //l1
 				if (j == i){
 					tmp.append(w1[j]);// = w1[j];
 				}else{
-					tmp.append(" "+w1[j]);//tmp = tmp + " " + w1[j];
+					tmp.append(" "+w1[j]); //tmp = tmp + " " + w1[j];
 				}
 				try{
 					h1.add(tmp.toString());
@@ -96,8 +90,7 @@ public int n; //一般是10
 					System.out.println(s1);
 					System.out.println(tmp.toString());
 					System.exit(0);
-				}
-				
+				}	
 //				if (++tot<100)
 //				System.out.println(tmp);
 //				if(++tot>10)
@@ -105,7 +98,6 @@ public int n; //一般是10
 			}
 		}
 		for (int i = 0; i < cnt2; ++i){ //l2
-//			String tmp = "";
 			tmp.setLength(0);
 			for (int j = i; j < cnt2; ++j){ //l2
 				if (j == i){
@@ -114,7 +106,6 @@ public int n; //一般是10
 					tmp.append(""+w2[j]);
 				}
 				h2.add(tmp.toString());
-//				System.out.println(tmp);
 			}
 		}
 		
@@ -125,13 +116,9 @@ public int n; //一般是10
 	    v1.addAll(h1);
 	    v1.retainAll(h2);
 	    int cnt_1=0;
-	    //for (String i: h1)
-	    	//System.out.println("集"+(++cnt_1)+":::		"+i);
-//	    System.exit(0);
-	    v2.clear();
+	    v2.clear(); //并集
 	    v2.addAll(h1);
 	    v2.addAll(h2);
-//	    System.out.println("并集："+v2);
 	    int tot1 = 0, tot2 = 0;
 	    for (String i: v1){
 	    	tot1 += i.replace(" ","").length();
@@ -217,7 +204,6 @@ public int n; //一般是10
 			 PrintStream out = new PrintStream(path);
 			 while (true) {// 凝聚层次聚类迭代
 				 out.println("Matrix update as below: ");
-//				 System.exit(0);
 				 for (int i = 0; i < matrix.length; ++i) {// 输出每次迭代更新的矩阵
 				 for (int j = 0; j < matrix.length - 1; ++j) {
 					 	out.print(new DecimalFormat("#.0000").format(matrix[i][j]) + " ");
@@ -231,7 +217,7 @@ public int n; //一般是10
 					 break;
 				 }
 				 out.println("Combine " + (minModel.x + 1) + " " + (minModel.y + 1));
-//				 System.out.println("!!!Combine " + (minModel.x + 1) + " " + (minModel.y + 1));
+//				 System.out.println("Combine " + (minModel.x + 1) + " " + (minModel.y + 1));
 				 
 				 matrix[minModel.x][minModel.y] = matrix[minModel.y][minModel.x] = -1;
 				 merge(minModel.x, minModel.y);
@@ -239,23 +225,14 @@ public int n; //一般是10
 				 out.println("The distance is: " + minModel.value);
 			 	}
 			 
-			 
-			 
-//			 Arrays.fill(scoreAll, 0);
 			 for (int i = 0; i < n; ++i){
 				 scoreAll[i] = 0.0;
-//				 System.out.print("i="+i+":  ");
 				 for (int j = 0; j < n; ++j){
 					 if (findRoot(j) == i){
-//						 if (j!=i)
-//							 System.out.print("      ");
-//						 System.out.println("~~"+findRoot(j));
 						 int r = findRoot(j);
 						 scoreAll[r] = scoreAll[r]+scores.get(j);
-//						 System.out.println("      "+arraylist.get(j).attributes[0]+';');
-					 }
+						 }
 				 }
-//				 System.out.println("");
 			 }
 			 
 			 Double maxD = 0.0;
@@ -267,7 +244,6 @@ public int n; //一般是10
 			 
 			 
 			 for (int i = 0; i < n; ++i){
-//				 System.out.println("i="+i+"va="+scoreAll[i]);
 				 if (scoreAll[i] > maxD){
 					 maxbelong = i;
 					 maxD = scoreAll[i];
@@ -285,7 +261,7 @@ public int n; //一般是10
 			 }
 			 
 //			 System.out.println("maxD = "+ maxD + "maxi=" + maxi);
-//			 System.out.println("$$$$$String$$$$$="+arraylist.get(maxi).attributes[0]);
+//			 System.out.println("arraylist.get(maxi)="+arraylist.get(maxi).attributes[0]);
 			 
 			 out.close();
 			 if (arraylist.size()>0 &&  arraylist.get(maxi).attributes.length>0)
@@ -308,12 +284,11 @@ public int n; //一般是10
 			 System.out.println(arraylist.get(i));
 			 nodes.add(node);
 		 }
-//		 Hierarchical hi = new Hierarchical();
 		 this.arraylist = nodes;
 		 inputWork(); //把每一个类的祖先标记为自己
 		 return processHierarchical("outProcess.txt", 0.9999999);
 		 //0.9999:BLEU=19.92（378个）
-		 //0.999999 好像很烂
+		 //0.999999 效果一般
 		 //0.99 BLEU=19.02(400个）
 		 //0.999 BLEU=19.93(400)
 	 }
@@ -339,30 +314,14 @@ public int n; //一般是10
 			 arraylist = new ArrayList<Node>();
 			 int cnt = 0;
 			 while ((str = br.readLine()) != null) {
-//				 System.out.println(str);
-//				 strArray = str.split(",");
-//				 dimension = strArray.length;
-//				 System.out.println("dimension="+dimension);
 				 Node node = new Node();
-//				 for (int i = 0; i < dimension; ++i) {
-//					 node.attributes[i] = Double.parseDouble(strArray[i]);
-//				 }
 				 node.attributes[0] = str;
 				 arraylist.add(node);
 				 if (++cnt>10){
 					 break;
 				 }
 			 }
-//			 System.exit(0);
-			 /*n = arraylist.size();
-			 matrix = new double[n][n];//double
-			 belong = new int[n];
-			 for (int i = 0; i < n; ++i){
-				 belong[i] = i;
-			 }
-			 
-			 loadMatrix();*/
-			 inputWork();//arraylist);
+			 inputWork();
 			 br.close();
 		 } catch (IOException e) {
 			 e.printStackTrace();
@@ -372,10 +331,4 @@ public int n; //一般是10
 	 public void printOutput(String path) {
 		 processHierarchical(path, 0.999);
 	 }
-	
-//	 public static void main(String[] args) {
-//		 Hierarchical hi = new Hierarchical();
-//		 hi.setInput("/Users/Mr.ZY/GitHub/api-cluster/AgglomerativeCluster/usage_data/test.txt");//"hierarchical.txt");
-//		 hi.printOutput("hierarchical_results.txt");
-//	 }
 }
